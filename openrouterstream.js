@@ -95,4 +95,15 @@ app.post('/api/chat', validateBody(chatRequestSchema), async (req, res) => {
                 usage: data.usage || null
             }
         });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            error: 'Terjadi kesalahan internal pada server',
+            details: error.message
+        });
     }
+});
+   
+app.listen(PORT, () => {
+    console.log(`Server berjalan di http://localhost:${PORT}`);
+});
